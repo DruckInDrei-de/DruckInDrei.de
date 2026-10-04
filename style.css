@@ -171,54 +171,150 @@ img {
 }
 
 
-/* =========================================================
-   NAVIGATION
+/*/* =========================================================
+   DROPDOWN NAVIGATION
    ========================================================= */
 
-nav {
+.main-navigation {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 26px;
 }
 
-nav a {
+.nav-dropdown {
+    position: relative;
+}
+
+.nav-dropdown-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 8px 0;
+
+    border: 0;
+    background: transparent;
+
     color: var(--text-soft);
 
     font-size: 0.92rem;
     font-weight: 600;
 
-    transition:
-        color 0.25s ease;
+    cursor: pointer;
+
+    transition: color 0.25s ease;
 }
 
-nav a:hover {
+.nav-dropdown-button:hover {
     color: var(--text);
 }
 
-.nav-button {
-    padding: 11px 20px;
+.dropdown-arrow {
+    font-size: 0.65rem;
 
-    border-radius: 999px;
-
-    color: white;
-
-    background: var(--surface-dark);
-
-    font-size: 0.9rem;
-    font-weight: 700;
-
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
+    transition: transform 0.25s ease;
 }
 
-.nav-button:hover {
-    transform: translateY(-2px);
+.dropdown-menu {
+    position: absolute;
+
+    top: calc(100% + 14px);
+    left: 50%;
+
+    min-width: 220px;
+
+    padding: 10px;
+
+    transform: translateX(-50%) translateY(-8px);
+
+    background: rgba(255, 253, 249, 0.97);
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
 
     box-shadow:
-        0 10px 25px rgba(41, 43, 45, 0.18);
+        0 18px 45px
+        rgba(41, 43, 45, 0.12);
+
+    backdrop-filter: blur(18px);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        visibility 0.2s ease;
+
+    z-index: 1100;
 }
 
+.dropdown-menu::before {
+    content: "";
+
+    position: absolute;
+
+    top: -6px;
+    left: 50%;
+
+    width: 12px;
+    height: 12px;
+
+    transform:
+        translateX(-50%)
+        rotate(45deg);
+
+    background: rgba(255, 253, 249, 0.97);
+
+    border-left: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+}
+
+.dropdown-menu a {
+    display: block;
+
+    padding: 11px 14px;
+
+    border-radius: 11px;
+
+    color: var(--text);
+
+    font-size: 0.88rem;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.dropdown-menu a:hover {
+    background: var(--bg-soft);
+
+    color: var(--accent-dark);
+
+    transform: translateX(3px);
+}
+
+.nav-dropdown.active .dropdown-menu {
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+
+.nav-dropdown.active .dropdown-arrow {
+    transform: rotate(180deg);
+}
 
 /* =========================================================
    HERO
